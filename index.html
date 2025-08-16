@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio Dhaka</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      color: #333;
+    }
+
+    /* Navigation Bar */
+    nav {
+      background: #0066cc;
+      padding: 10px 0;
+    }
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ddd;
+    }
+
+    /* Footer */
+    footer {
+      background: #0066cc;
+      padding: 10px 10px;
+      margin-top: 30px;
+    }
+    footer ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #ddd;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .logo img {
+      height: 80px;
+    }
+
+    /* Live Broadcast Section */
+    .broadcast {
+      max-width: 100vh;
+      width: 90vw;
+      margin: 0 auto;
+      background-color: white;
+      text-align: center;
+      color: blue;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .broadcast h2 {
+      margin-top: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .broadcast p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .broadcast audio {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    /* Shows Section */
+    .shows-section {
+      max-width: 150vh;
+      width: 90vw;
+      margin: 40px auto;
+    }
+    .shows-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+.shows-grid a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+    .shows-header h2 {
+      margin: 0;
+      font-size: 22px;
+      font-weight: bold;
+      color: #0066cc;
+    }
+    .shows-header a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #0066cc;
+    }
+    .shows-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .show-card {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      padding: 10px;
+    }
+    .show-card img {
+      width: 100%;
+      aspect-ratio: 1 / 1; /* keeps it square */
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    .show-card p {
+      margin: 10px 0 0;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav>
+    <ul>
+      <li><a href="https://club916.vercel.app/">Home</a></li>
+      <li><a href="https://club916.vercel.app/Radio-Jockies">Radio Jockies</a></li>
+      <li><a href="https://club916.vercel.app/Shows">Shows</a></li>
+    </ul>
+  </nav>
+
+  <!-- Logo -->
+  <div class="logo">
+    <img src="https://club916.vercel.app/logo.webp" alt="Radio Logo">
+  </div>
+
+  <!-- Live Broadcast Section -->
+  <div class="broadcast">
+    <h2>📻 Live broadcast from Dhaka, Bangladesh</h2>
+    <p>Listen 24/7 🕓 🌙 🌞</p>
+    <audio controls autoplay>
+      <source src="https://s3.myradiostream.com/14498/listen.mp3" type="audio/mpeg">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <!-- Shows Section -->
+<section class="shows-section">
+  <div class="shows-header">
+    <h2>Shows</h2>
+    <a href="https://club916.vercel.app/Shows">See More →</a>
+  </div>
+  <div class="shows-grid">
+    
+    <a href="https://club916.vercel.app/Shows/Midnight_Cafe" class="show-card">
+      <img src="https://club916.vercel.app/Shows/Midnight_Cafe.webp" alt="Midnight Cafe">
+      <p>Midnight Cafe</p>
+    </a>
+
+    <a href="https://club916.vercel.app/Shows/Mystery_916" class="show-card">
+      <img src="https://club916.vercel.app/Shows/Mystery_916.webp" alt="Mystery 916">
+      <p>Mystery 916</p>
+    </a>
+
+    <a href="https://club916.vercel.app/Shows/Uradhura_Peoples" class="show-card">
+      <img src="https://club916.vercel.app/Shows/Uradhura_Peoples.webp" alt="Uradhura Peoples">
+      <p>Uradhura Peoples</p>
+    </a>
+
+  </div>
+</section>
+
+<section class="shows-section">
+  <div class="shows-header">
+    <h2>Radio Jockies</h2>
+    <a href="https://club916.vercel.app/Radio-Jockies">See More →</a>
+  </div>
+  <div class="shows-grid">
+    
+    <a href="https://club916.vercel.app/Radio-Jockies/RJ-Rijon" class="show-card">
+      <img src="https://club916.vercel.app/Radio-Jockies/RJ-Rijon.webp" alt="Midnight Cafe">
+      <p>RJ Rijon</p>
+    </a>
+
+    <a href="https://club916.vercel.app/Radio-Jockies/RJ-Rajib" class="show-card">
+      <img src="https://club916.vercel.app/Radio-Jockies/RJ-Rijon.webp" alt="Mystery 916">
+      <p>RJ Rajib</p>
+    </a>
+
+    <a href="https://club916.vercel.app/Radio-Jockies/RJ-Nobin" class="show-card">
+      <img src="https://club916.vercel.app/Radio-Jockies/RJ-Rijon.webp" alt="Uradhura Peoples">
+      <p>RJ Nobin</p>
+    </a>
+
+  </div>
+</section>
+
+  <!-- Footer -->
+  <footer>
+    <ul>
+      <li><a href="https://www.facebook.com/syedashrafulislam.mahbeer">Powered by Syed Ashraful Islam</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
