@@ -149,6 +149,31 @@
       font-weight: bold;
       color: #333;
     }
+    @media (max-width: 768px) {
+  .shows-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .show-card {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    padding: 10px;
+  }
+  .show-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    margin-right: 15px;
+    object-fit: cover;
+  }
+  .show-card p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+}
   </style>
 </head>
 <body>
