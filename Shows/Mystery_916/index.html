@@ -1,1 +1,252 @@
-Updating Site...
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quran Playlist Player</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f3f3f3;
+      color: #333;
+      scroll-behavior: smooth;
+      padding-bottom: 120px; /* for fixed player */
+    }
+
+    /* Navigation Bar */
+    nav {
+      background: #0066cc;
+      padding: 10px 0;
+    }
+    nav ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: #ddd;
+    }
+
+    /* Footer */
+    footer {
+      background: #0066cc;
+      padding: 10px 10px;
+      margin-top: 30px;
+    }
+    footer ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      justify-content: center;
+    }
+    footer a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s;
+    }
+    footer a:hover {
+      color: #ddd;
+    }
+
+    /* Logo */
+    .logo {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .logo img {
+      height: 80px;
+    }
+
+    /* Live Broadcast Section */
+    .broadcast {
+      max-width: 100vh;
+      width: 80vw;
+      margin: 0 auto;
+      background-color: white;
+      text-align: center;
+      color: blue;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .broadcast h2 {
+      margin-top: 0;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .broadcast p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .broadcast audio {
+      width: 100%;
+      max-width: 500px;
+    }
+
+    /* Playlist Section */
+    #playlist {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 1rem 2rem;
+    }
+
+    .track {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0.5rem 0;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #ccc;
+    }
+    .track:last-child {
+      border-bottom: none;
+    }
+    .track-title {
+      flex: 1;
+      margin-right: 1rem;
+    }
+
+    button {
+      margin-left: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #0066cc;
+      color: white;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #004999;
+    }
+
+    #player-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: #0066cc;
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.4);
+      padding: 1rem 2rem;
+      display: none;
+      z-index: 999;
+      color: white;
+    }
+
+    #now-playing {
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    #audio-player {
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav>
+    <ul>
+      <li><a href="https://club916.vercel.app/">Home</a></li>
+      <li><a href="https://club916.vercel.app/Radio-Jockies">Radio Jockies</a></li>
+      <li><a href="https://club916.vercel.app/Shows">Shows</a></li>
+    </ul>
+  </nav>
+
+  <!-- Logo -->
+  <div class="logo">
+    <img src="https://club916.vercel.app/logo.png" alt="Radio Logo">
+  </div>
+  <h1 style="text-align:center; color:#0066cc; margin-top:40px;">Quran Playlist</h1>
+  <div id="playlist">Loading playlist...</div>
+
+  <div id="player-container">
+    <div id="now-playing">Now Playing:</div>
+    <audio id="audio-player" controls></audio>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <ul>
+      <li><a href="https://www.facebook.com/syedashrafulislam.mahbeer">Powered by Syed Ashraful Islam</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    function getQueryParam(key) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(key);
+    }
+
+    async function loadPlaylist() {
+      const m3uFile = getQueryParam('m3u') || 'https://club916.vercel.app/Shows/Mystery_916/playlist.m3u';
+      try {
+        const response = await fetch(m3uFile);
+        const text = await response.text();
+        const lines = text.split('\n').map(line => line.trim());
+        const playlist = [];
+        for (let i = 0; i < lines.length; i++) {
+          if (lines[i].startsWith('#EXTINF')) {
+            const title = lines[i].split(',').pop().trim();
+            const url = lines[i + 1] ? lines[i + 1].trim() : '';
+            if (url) { playlist.push({ title, url }); i++; }
+          }
+        }
+        const playlistContainer = document.getElementById('playlist');
+        playlistContainer.innerHTML = '';
+        playlist.forEach(({ title, url }) => {
+          const trackDiv = document.createElement('div');
+          trackDiv.className = 'track';
+          const titleDiv = document.createElement('div');
+          titleDiv.className = 'track-title';
+          titleDiv.textContent = title;
+          const playBtn = document.createElement('button');
+          playBtn.textContent = 'Play';
+          playBtn.onclick = () => playTrack(url, title);
+          const downloadBtn = document.createElement('button');
+          downloadBtn.textContent = 'Download';
+          downloadBtn.onclick = () => window.open(url, '_blank');
+          trackDiv.appendChild(titleDiv);
+          trackDiv.appendChild(playBtn);
+          trackDiv.appendChild(downloadBtn);
+          playlistContainer.appendChild(trackDiv);
+        });
+      } catch (err) {
+        document.getElementById('playlist').textContent = 'Failed to load or parse M3U.';
+        console.error(err);
+      }
+    }
+
+    function playTrack(url, title) {
+      document.getElementById('now-playing').textContent = 'Now Playing: ' + title;
+      const audioPlayer = document.getElementById('audio-player');
+      audioPlayer.src = url;
+      audioPlayer.play();
+      document.getElementById('player-container').style.display = 'block';
+    }
+
+    loadPlaylist();
+  </script>
+
+</body>
+</html>
